@@ -15,6 +15,7 @@ Imports System.IO.Compression
 
 Public Class input_backup_path
     Dim HSXML As New HSXML
+    Dim return_input_saves As Boolean = True
 
     Private Sub browse_btn_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles browse_btn.LinkClicked
         If FolderBrowserDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
@@ -34,6 +35,7 @@ Public Class input_backup_path
                 MsgBox("写入配置文件时出现错误：" & ex.Message, MsgBoxStyle.Critical, "错误")
             End Try
             Try
+                return_input_saves = False
                 If MsgBox("配置完成，要立即执行一次备份吗？", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "提示") = MsgBoxResult.Yes Then
                     If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") = False Then
                         MsgBox("配置文件(BackupFolder.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
@@ -147,7 +149,6 @@ Public Class input_backup_path
     End Sub
 
     Private Sub input_backup_path_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        input_saves.Show()
-        Me.Close()
+        If return_input_saves = True Then input_saves.Show()
     End Sub
 End Class

@@ -139,6 +139,7 @@ Public Class input_saves
         On Error Resume Next
         Me.ProgressBar1.Value = 100
         Me.ProgressBar1.Visible = False
+        exit_program = False
         input_backup_path.Show()
         Me.Close()
     End Sub
@@ -164,10 +165,6 @@ Public Class input_saves
 
     Private Sub input_saves_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         On Error Resume Next
-        If exit_program = True Then
-            End
-        Else
-            Me.Close()
-        End If
+        If exit_program = True Then End
     End Sub
 End Class
