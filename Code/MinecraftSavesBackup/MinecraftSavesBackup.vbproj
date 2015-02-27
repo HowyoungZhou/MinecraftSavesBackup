@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0F9CA3B2-4017-4617-B53E-73E1FE51951E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>MinecraftSavesBackup.My.MyApplication</StartupObject>
+    <RootNamespace>MinecraftSavesBackup</RootNamespace>
+    <AssemblyName>MinecraftSavesBackup</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>F:\HY Soft\MinecraftSavesBackup\Release\Setup\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://github.com/HowyoungZhou/MinecraftSavesBackup</SupportUrl>
+    <ErrorReportUrl>https://github.com/HowyoungZhou/MinecraftSavesBackup/issues</ErrorReportUrl>
+    <ProductName>Minecraft存档备份</ProductName>
+    <PublisherName>Howyoung</PublisherName>
+    <SuiteName>MinecraftSavesBackup</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.1.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>MinecraftSavesBackup.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>MinecraftSavesBackup.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon_512x512.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>A4AD262688535E0DBE5EBD7A9986E10B2D5AB227</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>hyscpy_signature.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.wosign.com/timestamp</ManifestTimestampUrl>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>hyscpy_signature.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.IO.Compression.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="about.Designer.vb">
+      <DependentUpon>about.vb</DependentUpon>
+    </Compile>
+    <Compile Include="about.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="backup_animation.Designer.vb">
+      <DependentUpon>backup_animation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="backup_animation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HSXML.vb" />
+    <Compile Include="input_backup_path.Designer.vb">
+      <DependentUpon>input_backup_path.vb</DependentUpon>
+    </Compile>
+    <Compile Include="input_backup_path.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="input_saves.Designer.vb">
+      <DependentUpon>input_saves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="input_saves.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manage_config.Designer.vb">
+      <DependentUpon>manage_config.vb</DependentUpon>
+    </Compile>
+    <Compile Include="manage_config.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="main.Designer.vb">
+      <DependentUpon>main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="outstanding_contribution.Designer.vb">
+      <DependentUpon>outstanding_contribution.vb</DependentUpon>
+    </Compile>
+    <Compile Include="outstanding_contribution.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="online_update.Designer.vb">
+      <DependentUpon>online_update.vb</DependentUpon>
+    </Compile>
+    <Compile Include="online_update.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view_backup.Designer.vb">
+      <DependentUpon>view_backup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="view_backup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="about.resx">
+      <DependentUpon>about.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="backup_animation.resx">
+      <DependentUpon>backup_animation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="input_backup_path.resx">
+      <DependentUpon>input_backup_path.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="input_saves.resx">
+      <DependentUpon>input_saves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manage_config.resx">
+      <DependentUpon>manage_config.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="outstanding_contribution.resx">
+      <DependentUpon>outstanding_contribution.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="online_update.resx">
+      <DependentUpon>online_update.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view_backup.resx">
+      <DependentUpon>view_backup.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hyscpy_signature.pfx" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c5.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c6.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c7.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c8.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c9.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c10.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c11.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c12.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c13.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c14.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c15.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_16x16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon_512x512.ico" />
+    <None Include="Resources\ch2.png" />
+    <None Include="Resources\ch1.png" />
+    <None Include="Resources\weibo_logo.png" />
+    <None Include="Resources\tieba_logo.png" />
+    <None Include="Resources\outstanding_contribution.png" />
+    <None Include="Resources\icon_40x40.png" />
+    <None Include="Resources\icon_64x64.png" />
+    <None Include="Resources\about_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="System.IO.Compression">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="System.IO.Compression.FileSystem">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
