@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -11,7 +11,7 @@
 '份复制物上发布适当的著作权标示及无担保声明。
 '------------------------------------------------------------
 Imports System.IO
-Imports System.IO.Compression
+Imports MinecraftSavesBackup.Compression
 Imports System.Security.Cryptography
 
 Public Class view_backup
@@ -149,7 +149,7 @@ Public Class view_backup
                     Dim extractPath As String = savespath & CStr(saves_lstbox.CheckedItems.Item(i)).Replace(".saves", Nothing)
                     If My.Computer.FileSystem.DirectoryExists(extractPath) Then My.Computer.FileSystem.DeleteDirectory(extractPath, FileIO.DeleteDirectoryOption.DeleteAllContents)
                     My.Computer.FileSystem.CreateDirectory(extractPath)
-                    ZipFile.ExtractToDirectory(zipPath, extractPath)
+                    DecompressZip(zipPath, extractPath)
                     Dim percent As Decimal = i + 1 / saves_lstbox.CheckedItems.Count * 100
                     recovery_btn.Text = "正在恢复(" & CStr(percent) & "%)"
                 Next
@@ -159,6 +159,8 @@ Public Class view_backup
             End If
         Catch ex As Exception
             MsgBox("无法恢复存档：" & ex.Message, MsgBoxStyle.Critical, "错误")
+            recovery_btn.Enabled = True
+            recovery_btn.Text = "恢复选定的存档(&R)"
         End Try
     End Sub
 
@@ -174,7 +176,7 @@ Public Class view_backup
                 End If
                 Dim startPath As String = backuppath
                 Dim zipPath As String = SaveFileDialog1.FileName
-                ZipFile.CreateFromDirectory(startPath, zipPath)
+                CompressFolder(startPath, zipPath, 1)
                 MsgBox("成功导出备份。", MsgBoxStyle.Information, "提示")
             End If
         Catch ex As Exception
@@ -192,7 +194,7 @@ Public Class view_backup
                 Else
                     backuppath = My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini") & "\" & OpenFileDialog1.SafeFileName.Replace(".backup", Nothing)
                 End If
-                ZipFile.ExtractToDirectory(zipPath, backuppath)
+                DecompressZip(zipPath, backuppath)
                 RefreshInfo()
                 MsgBox("成功导入备份。", MsgBoxStyle.Information, "提示")
             End If
@@ -231,6 +233,8 @@ Public Class view_backup
             MsgBox("恢复存档时出现错误：" & ex.Message, MsgBoxStyle.Critical, "错误")
             BackgroundWorker1.CancelAsync()
             errorhappend = True
+            recovery_btn.Enabled = True
+            recovery_btn.Text = "恢复选定的存档(&R)"
         End Try
     End Sub
 

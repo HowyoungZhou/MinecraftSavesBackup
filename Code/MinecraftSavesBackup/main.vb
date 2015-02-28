@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -10,7 +10,7 @@
 '整的复制物，然而您必须符合以下要件：以显著及适当的方式在每一
 '份复制物上发布适当的著作权标示及无担保声明。
 '------------------------------------------------------------
-Imports System.IO.Compression
+Imports MinecraftSavesBackup.Compression
 Imports System.IO
 Imports System.Security.Cryptography
 
@@ -67,6 +67,8 @@ Public Class main
             '------
             HSXML.Write("MaxBackupTotal", CStr(maxtotal_NumericUpDown.Value), AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
             HSXML.Write("LargestBackupSize", CStr(largest_size_NumericUpDown.Value), AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
+            '------
+            HSXML.Write("CompressionLevel", CStr(level_TrackBar.Value), AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
             '------
             '使设置生效
             AutomaticBackupTimer.Enabled = HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "AutomaticBackup")
@@ -167,6 +169,19 @@ Public Class main
             backup_BackgroundWorker.RunWorkerAsync()
         Catch ex As Exception
             MsgBox("无法启动备份：" & ex.Message, MsgBoxStyle.Critical, "错误")
+            refresh_info()
+            ProgressBar1.Value = 100
+            percent_lbl.Text = "已完成100%"
+            state_lbl.Text = "当前状态：备份出错"
+            当前状态ToolStripMenuItem.Text = "当前状态：备份出错"
+            LinkLabel1.Enabled = True
+            backup_btn.Enabled = True
+            立即备份BToolStripMenuItem.Enabled = True
+            backup_btn.Text = "立即备份(&B)"
+            NotifyIconTimer.Enabled = False
+            NotifyIcon1.Icon = My.Resources.icon_16x16
+            NotifyIcon1.Text = "Minecraft存档备份"
+            backup_animation.Close()
         End Try
     End Sub
 
@@ -217,7 +232,7 @@ Public Class main
                 My.Computer.FileSystem.CreateDirectory(backuppath)
                 Dim zipPath As String = backuppath & "\" & gamename & ".saves"
                 If My.Computer.FileSystem.FileExists(zipPath) Then My.Computer.FileSystem.DeleteFile(zipPath)
-                ZipFile.CreateFromDirectory(startPath, zipPath)
+                CompressFolder(startPath, zipPath, Val(HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "CompressionLevel")))
                 Dim percent As Decimal = i / HSXML.Count(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") * 50
                 backup_BackgroundWorker.ReportProgress(Decimal.Round(percent, 0))
             Next
@@ -250,6 +265,19 @@ Public Class main
         Catch ex As Exception
             NotifyIcon1.ShowBalloonTip(5000, "Minecraft存档备份", "备份时出错：" & ex.Message, ToolTipIcon.Error)
             backup_BackgroundWorker.CancelAsync()
+            refresh_info()
+            ProgressBar1.Value = 100
+            percent_lbl.Text = "已完成100%"
+            state_lbl.Text = "当前状态：备份出错"
+            当前状态ToolStripMenuItem.Text = "当前状态：备份出错"
+            LinkLabel1.Enabled = True
+            backup_btn.Enabled = True
+            立即备份BToolStripMenuItem.Enabled = True
+            backup_btn.Text = "立即备份(&B)"
+            NotifyIconTimer.Enabled = False
+            NotifyIcon1.Icon = My.Resources.icon_16x16
+            NotifyIcon1.Text = "Minecraft存档备份"
+            backup_animation.Close()
         End Try
     End Sub
 
@@ -344,6 +372,19 @@ Public Class main
             End If
         Catch ex As Exception
             NotifyIcon1.ShowBalloonTip(5000, "Minecraft存档备份", "无法启动自动备份：" & ex.Message, ToolTipIcon.Error)
+            refresh_info()
+            ProgressBar1.Value = 100
+            percent_lbl.Text = "已完成100%"
+            state_lbl.Text = "当前状态：备份出错"
+            当前状态ToolStripMenuItem.Text = "当前状态：备份出错"
+            LinkLabel1.Enabled = True
+            backup_btn.Enabled = True
+            立即备份BToolStripMenuItem.Enabled = True
+            backup_btn.Text = "立即备份(&B)"
+            NotifyIconTimer.Enabled = False
+            NotifyIcon1.Icon = My.Resources.icon_16x16
+            NotifyIcon1.Text = "Minecraft存档备份"
+            backup_animation.Close()
         End Try
     End Sub
 
@@ -373,6 +414,19 @@ Public Class main
         Catch ex As Exception
             NotifyIcon1.ShowBalloonTip(5000, "Minecraft存档备份", "检测文件变动时出错：" & ex.Message, ToolTipIcon.Error)
             find_difference_BackgroundWorker.CancelAsync()
+            refresh_info()
+            ProgressBar1.Value = 100
+            percent_lbl.Text = "已完成100%"
+            state_lbl.Text = "当前状态：检测文件变动时出错"
+            当前状态ToolStripMenuItem.Text = "当前状态：检测文件变动时出错"
+            LinkLabel1.Enabled = True
+            backup_btn.Enabled = True
+            立即备份BToolStripMenuItem.Enabled = True
+            backup_btn.Text = "立即备份(&B)"
+            NotifyIconTimer.Enabled = False
+            NotifyIcon1.Icon = My.Resources.icon_16x16
+            NotifyIcon1.Text = "Minecraft存档备份"
+            backup_animation.Close()
         End Try
     End Sub
 
@@ -530,6 +584,7 @@ Public Class main
                 HSXML.Write("MaxBackupTotal", "20", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 HSXML.Write("LargestBackupSize", "50", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 HSXML.Write("ShowBackupAnimation", "True", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
+                HSXML.Write("CompressionLevel", "5", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 '-----
                 NotifyIcon1.Visible = True
                 show_backup_animation_CheckBox.Checked = HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "ShowBackupAnimation")
@@ -540,6 +595,7 @@ Public Class main
                 '加载备份文件夹地址
                 backup_path_lbl.Text = "备份地址：" & My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini")
                 '加载设置
+                level_TrackBar.Value = Val(HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "CompressionLevel"))
                 If HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "AutomaticBackup") = "True" Then
                     automaticbackup_checkbox.Checked = True
                     自动备份AToolStripMenuItem.Text = "关闭自动备份(&C)"
@@ -658,7 +714,8 @@ Public Class main
                     Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "AutomaticDeleteBackupCondition") = False _
                     Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "MaxBackupTotal") = False _
                     Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "LargestBackupSize") = False _
-                    Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "ShowBackupAnimation") = False Then
+                    Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "ShowBackupAnimation") = False _
+                    Or HSXML.Verify(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "CompressionLevel") = False Then
                     If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                     HSXML.Write("AutomaticBackup", "True", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                     HSXML.Write("AutomaticBackupType", "AtSetIntervals", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
@@ -669,6 +726,7 @@ Public Class main
                     HSXML.Write("MaxBackupTotal", "20", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                     HSXML.Write("LargestBackupSize", "50", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                     HSXML.Write("ShowBackupAnimation", "True", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
+                    HSXML.Write("CompressionLevel", "5", AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 End If
                 NotifyIcon1.Visible = True
                 show_backup_animation_CheckBox.Checked = HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "ShowBackupAnimation")
@@ -680,6 +738,7 @@ Public Class main
                 '加载备份文件夹地址
                 backup_path_lbl.Text = "备份地址：" & My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini")
                 '加载设置
+                level_TrackBar.Value = Val(HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "CompressionLevel"))
                 If HSXML.Read(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml", "AutomaticBackup") = "True" Then
                     automaticbackup_checkbox.Checked = True
                     自动备份AToolStripMenuItem.Text = "关闭自动备份(&C)"
@@ -826,6 +885,19 @@ Public Class main
             backup_BackgroundWorker.RunWorkerAsync()
         Catch ex As Exception
             MsgBox("无法启动备份：" & ex.Message, MsgBoxStyle.Critical, "错误")
+            refresh_info()
+            ProgressBar1.Value = 100
+            percent_lbl.Text = "已完成100%"
+            state_lbl.Text = "当前状态：备份出错"
+            当前状态ToolStripMenuItem.Text = "当前状态：备份出错"
+            LinkLabel1.Enabled = True
+            backup_btn.Enabled = True
+            立即备份BToolStripMenuItem.Enabled = True
+            backup_btn.Text = "立即备份(&B)"
+            NotifyIconTimer.Enabled = False
+            NotifyIcon1.Icon = My.Resources.icon_16x16
+            NotifyIcon1.Text = "Minecraft存档备份"
+            backup_animation.Close()
         End Try
     End Sub
 
@@ -943,5 +1015,9 @@ Public Class main
             online_update.newest_version_lbl.Text = "最新版本：" & My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "version.ini")
             online_update.Show()
         End If
+    End Sub
+
+    Private Sub level_TrackBar_MouseUp(sender As Object, e As MouseEventArgs) Handles level_TrackBar.MouseUp
+        write_config()
     End Sub
 End Class

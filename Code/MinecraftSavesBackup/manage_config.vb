@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -10,7 +10,7 @@
 '整的复制物，然而您必须符合以下要件：以显著及适当的方式在每一
 '份复制物上发布适当的著作权标示及无担保声明。
 '------------------------------------------------------------
-Imports System.IO.Compression
+Imports MinecraftSavesBackup.Compression
 
 Public Class manage_config
 
@@ -46,7 +46,7 @@ Public Class manage_config
                 My.Computer.FileSystem.CopyFile(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini", AppDomain.CurrentDomain.BaseDirectory & "ConfigTemp\savesPath.ini")
                 Dim startPath As String = "ConfigTemp"
                 Dim zipPath As String = SaveFileDialog1.FileName
-                ZipFile.CreateFromDirectory(startPath, zipPath)
+                CompressFolder(startPath, zipPath, 1)
                 If My.Computer.FileSystem.DirectoryExists("ConfigTemp") Then My.Computer.FileSystem.DeleteDirectory("ConfigTemp", FileIO.DeleteDirectoryOption.DeleteAllContents)
                 MsgBox("导出设置成功。", MsgBoxStyle.Information, "导出成功")
             End If
@@ -65,7 +65,7 @@ Public Class manage_config
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml")
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini")
-                ZipFile.ExtractToDirectory(zipPath, extractPath)
+                DecompressZip(zipPath, extractPath)
                 MsgBox("导入设置成功，设置将在下次启动软件后生效。", MsgBoxStyle.Information, "导出成功")
             End If
         Catch ex As Exception

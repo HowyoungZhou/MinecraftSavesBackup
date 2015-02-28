@@ -41,6 +41,10 @@ Partial Class main
         Me.saves_lstbox = New System.Windows.Forms.ListBox()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.level_TrackBar = New System.Windows.Forms.TrackBar()
         Me.show_backup_animation_CheckBox = New System.Windows.Forms.CheckBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.largest_size_NumericUpDown = New System.Windows.Forms.NumericUpDown()
@@ -84,6 +88,7 @@ Partial Class main
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.level_TrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox7.SuspendLayout()
         CType(Me.largest_size_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.maxtotal_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -243,6 +248,10 @@ Partial Class main
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.level_TrackBar)
         Me.GroupBox2.Controls.Add(Me.show_backup_animation_CheckBox)
         Me.GroupBox2.Controls.Add(Me.GroupBox7)
         Me.GroupBox2.Controls.Add(Me.autostart_checkbox)
@@ -253,10 +262,47 @@ Partial Class main
         Me.GroupBox2.Controls.Add(Me.automaticbackup_checkbox)
         Me.GroupBox2.Location = New System.Drawing.Point(298, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(280, 364)
+        Me.GroupBox2.Size = New System.Drawing.Size(280, 424)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "设置"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(219, 406)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(55, 13)
+        Me.Label7.TabIndex = 21
+        Me.Label7.Text = "最大压缩"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(6, 406)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(43, 13)
+        Me.Label6.TabIndex = 20
+        Me.Label6.Text = "无压缩"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 358)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(55, 13)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "压缩等级"
+        '
+        'level_TrackBar
+        '
+        Me.level_TrackBar.Location = New System.Drawing.Point(9, 374)
+        Me.level_TrackBar.Maximum = 9
+        Me.level_TrackBar.Minimum = 1
+        Me.level_TrackBar.Name = "level_TrackBar"
+        Me.level_TrackBar.Size = New System.Drawing.Size(262, 45)
+        Me.level_TrackBar.TabIndex = 18
+        Me.level_TrackBar.Value = 5
         '
         'show_backup_animation_CheckBox
         '
@@ -440,7 +486,7 @@ Partial Class main
         Me.GroupBox3.Controls.Add(Me.exit_btn)
         Me.GroupBox3.Controls.Add(Me.recovery_btn)
         Me.GroupBox3.Controls.Add(Me.backup_btn)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 278)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 338)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(280, 98)
         Me.GroupBox3.TabIndex = 4
@@ -495,7 +541,7 @@ Partial Class main
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MinecraftToolStripMenuItem, Me.ToolStripSeparator1, Me.当前状态ToolStripMenuItem, Me.ToolStripSeparator2, Me.打开主窗体OToolStripMenuItem, Me.立即备份BToolStripMenuItem, Me.自动备份AToolStripMenuItem, Me.查看备份VToolStripMenuItem, Me.退出EToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(231, 192)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(231, 170)
         '
         'MinecraftToolStripMenuItem
         '
@@ -560,7 +606,7 @@ Partial Class main
         Me.GroupBox8.Controls.Add(Me.backup_size_lbl)
         Me.GroupBox8.Location = New System.Drawing.Point(12, 93)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(280, 179)
+        Me.GroupBox8.Size = New System.Drawing.Size(280, 239)
         Me.GroupBox8.TabIndex = 6
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "现有备份"
@@ -568,15 +614,15 @@ Partial Class main
         'backup_lstbox
         '
         Me.backup_lstbox.FormattingEnabled = True
-        Me.backup_lstbox.Location = New System.Drawing.Point(6, 19)
+        Me.backup_lstbox.Location = New System.Drawing.Point(6, 21)
         Me.backup_lstbox.Name = "backup_lstbox"
-        Me.backup_lstbox.Size = New System.Drawing.Size(268, 134)
+        Me.backup_lstbox.Size = New System.Drawing.Size(268, 186)
         Me.backup_lstbox.TabIndex = 1
         '
         'backup_size_lbl
         '
         Me.backup_size_lbl.AutoSize = True
-        Me.backup_size_lbl.Location = New System.Drawing.Point(6, 159)
+        Me.backup_size_lbl.Location = New System.Drawing.Point(3, 216)
         Me.backup_size_lbl.Name = "backup_size_lbl"
         Me.backup_size_lbl.Size = New System.Drawing.Size(98, 13)
         Me.backup_size_lbl.TabIndex = 0
@@ -595,7 +641,7 @@ Partial Class main
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(590, 388)
+        Me.ClientSize = New System.Drawing.Size(590, 448)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox3)
@@ -613,6 +659,7 @@ Partial Class main
         Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.level_TrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         CType(Me.largest_size_NumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
@@ -684,4 +731,8 @@ Partial Class main
     Friend WithEvents 自动备份AToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents show_backup_animation_CheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents check_update_BackgroundWorker As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents level_TrackBar As System.Windows.Forms.TrackBar
 End Class

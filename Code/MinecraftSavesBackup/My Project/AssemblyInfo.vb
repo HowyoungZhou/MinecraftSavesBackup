@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Minecraft存档备份")> 
 <Assembly: AssemblyCompany("Howyoung")> 
 <Assembly: AssemblyProduct("MinecraftSavesBackup")> 
-<Assembly: AssemblyCopyright("Copyright © 2015 Howyoung.")> 
+<Assembly: AssemblyCopyright("Copyright © 2015 HowyoungZhou")> 
 <Assembly: AssemblyTrademark("MinecraftSavesBackup™")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 方法是按如下所示使用“*”: 
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.0.0")> 
-<Assembly: AssemblyFileVersion("1.1.0.0")> 
+<Assembly: AssemblyVersion("1.1.0.4")> 
+<Assembly: AssemblyFileVersion("1.1.0.4")> 

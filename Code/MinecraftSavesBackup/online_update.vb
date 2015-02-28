@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that

@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -11,7 +11,7 @@
 '份复制物上发布适当的著作权标示及无担保声明。
 '------------------------------------------------------------
 Imports System.IO
-Imports System.IO.Compression
+Imports MinecraftSavesBackup.Compression
 
 Public Class input_backup_path
     Dim HSXML As New HSXML
@@ -69,6 +69,8 @@ Public Class input_backup_path
                 End If
             Catch ex As Exception
                 MsgBox("无法启动自动备份：" & ex.Message, MsgBoxStyle.Critical, "错误")
+                ok_btn.Enabled = True
+                ok_btn.Text = "确定(&O)"
             End Try
         End If
     End Sub
@@ -123,12 +125,14 @@ Public Class input_backup_path
                 End If
                 My.Computer.FileSystem.CreateDirectory(backuppath)
                 Dim zipPath As String = backuppath & "\" & gamename & ".saves"
-                ZipFile.CreateFromDirectory(startPath, zipPath)
+                CompressFolder(startPath, zipPath, 5)
                 BackgroundWorker1.ReportProgress(i / HSXML.Count(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") * 100)
             Next
         Catch ex As Exception
             MsgBox("备份时出错：" & ex.Message, MsgBoxStyle.Critical, "错误")
             BackgroundWorker1.CancelAsync()
+            ok_btn.Enabled = True
+            ok_btn.Text = "确定(&O)"
         End Try
     End Sub
 

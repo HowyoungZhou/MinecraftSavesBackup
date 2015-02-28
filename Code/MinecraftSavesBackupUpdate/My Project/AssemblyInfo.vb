@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Minecraft存档备份更新程序")> 
 <Assembly: AssemblyCompany("Howyoung")> 
 <Assembly: AssemblyProduct("MinecraftSavesBackup")> 
-<Assembly: AssemblyCopyright("Copyright © 2015 Howyoung.")> 
+<Assembly: AssemblyCopyright("Copyright © 2015 HowyoungZhou")> 
 <Assembly: AssemblyTrademark("MinecraftSavesBackup™")> 
 
 <Assembly: ComVisible(False)>

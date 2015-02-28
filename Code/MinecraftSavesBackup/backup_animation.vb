@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -23,6 +23,8 @@ Public Class backup_animation
     End Sub
 
     Private Sub backup_animation_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Me.Height = PictureBox1.Height
+        Me.Width = PictureBox1.Height
         Me.Top = 64
         Me.Left = My.Computer.Screen.WorkingArea.Size.Width - 64 - 50
     End Sub

@@ -38,6 +38,7 @@ Partial Class about
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -85,7 +86,7 @@ Partial Class about
         'copyright_lbl
         '
         Me.copyright_lbl.AutoSize = True
-        Me.copyright_lbl.Location = New System.Drawing.Point(148, 72)
+        Me.copyright_lbl.Location = New System.Drawing.Point(148, 65)
         Me.copyright_lbl.Name = "copyright_lbl"
         Me.copyright_lbl.Size = New System.Drawing.Size(58, 13)
         Me.copyright_lbl.TabIndex = 4
@@ -103,7 +104,7 @@ Partial Class about
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(148, 99)
+        Me.Label2.Location = New System.Drawing.Point(148, 109)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(268, 26)
         Me.Label2.TabIndex = 6
@@ -112,7 +113,7 @@ Partial Class about
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(149, 125)
+        Me.LinkLabel1.Location = New System.Drawing.Point(149, 135)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(292, 13)
         Me.LinkLabel1.TabIndex = 7
@@ -143,9 +144,9 @@ Partial Class about
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(257, 217)
+        Me.Button2.Location = New System.Drawing.Point(249, 217)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(90, 32)
+        Me.Button2.Size = New System.Drawing.Size(98, 32)
         Me.Button2.TabIndex = 10
         Me.Button2.Text = "突出贡献者(&C)"
         Me.Button2.UseVisualStyleBackColor = True
@@ -153,7 +154,7 @@ Partial Class about
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(148, 140)
+        Me.Label4.Location = New System.Drawing.Point(148, 150)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(231, 13)
         Me.Label4.TabIndex = 11
@@ -162,7 +163,7 @@ Partial Class about
         'LinkLabel3
         '
         Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(374, 140)
+        Me.LinkLabel3.Location = New System.Drawing.Point(374, 150)
         Me.LinkLabel3.Name = "LinkLabel3"
         Me.LinkLabel3.Size = New System.Drawing.Size(55, 13)
         Me.LinkLabel3.TabIndex = 12
@@ -172,7 +173,7 @@ Partial Class about
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(425, 140)
+        Me.Label5.Location = New System.Drawing.Point(425, 150)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(15, 13)
         Me.Label5.TabIndex = 13
@@ -188,6 +189,15 @@ Partial Class about
         Me.LinkLabel4.TabStop = True
         Me.LinkLabel4.Text = "检查更新(&U)"
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(148, 78)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(156, 26)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "SharpZipLib" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Copyright © 2001 Mike Krueger"
+        '
         'about
         '
         Me.AcceptButton = Me.Button1
@@ -195,6 +205,7 @@ Partial Class about
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(455, 261)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.LinkLabel4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.LinkLabel3)
@@ -237,4 +248,5 @@ Partial Class about
     Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents LinkLabel4 As System.Windows.Forms.LinkLabel
+    Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class

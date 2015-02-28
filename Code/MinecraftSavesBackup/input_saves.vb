@@ -1,5 +1,5 @@
 ﻿'------------------------------------------------------------
-'Copyright © 2015 Howyoung.
+'Copyright © 2015 HowyoungZhou
 '------------------------------------------------------------
 'You may copy and distribute verbatim copies of the Program's
 'source code as you receive it, in any medium, provided that
@@ -12,7 +12,7 @@
 '------------------------------------------------------------
 Imports System.IO
 Imports System.Security.Cryptography
-Imports System.IO.Compression
+Imports MinecraftSavesBackup.Compression
 
 Public Class input_saves
     Dim HSXML As New HSXML
@@ -55,32 +55,46 @@ Public Class input_saves
         ElseIf found_lstbox.Items.Contains("您指定的不是存档文件夹，请重试。") Then
             MsgBox("您指定的不是存档文件夹，请重试。", MsgBoxStyle.Exclamation, "提示")
         Else
-            ok_btn.Enabled = False
-            ok_btn.Text = "等待..."
-            cancel_btn.Enabled = False
-            browse_btn.Enabled = False
-            '写savespath文件
-            If Strings.Right(path_txtbox.Text, 1) = "\" Then
-                My.Computer.FileSystem.WriteAllText(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini", path_txtbox.Text, False)
-            Else
-                My.Computer.FileSystem.WriteAllText(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini", path_txtbox.Text & "\", False)
-            End If
-            '写backupfolder文件
-            If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml")
-            Dim count As Integer = 1
-            For i = 0 To found_lstbox.CheckedItems.Count - 1 Step 1
-                Dim text As String = path_txtbox.Text
-                If Strings.Right(text, 1) <> "\" Then
-                    text = text & "\" & found_lstbox.CheckedItems.Item(i)
+            Try
+                ok_btn.Enabled = False
+                ok_btn.Text = "等待..."
+                cancel_btn.Enabled = False
+                browse_btn.Enabled = False
+                '写savespath文件
+                If Strings.Right(path_txtbox.Text, 1) = "\" Then
+                    My.Computer.FileSystem.WriteAllText(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini", path_txtbox.Text, False)
                 Else
-                    text = text & found_lstbox.CheckedItems.Item(i)
+                    My.Computer.FileSystem.WriteAllText(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini", path_txtbox.Text & "\", False)
                 End If
-                HSXML.Write(count, text, AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml")
-                count = count + 1
-            Next
-            Me.ProgressBar1.Value = 0
-            Me.ProgressBar1.Visible = True
-            BackgroundWorker1.RunWorkerAsync()
+                '写backupfolder文件
+                If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml")
+                Dim count As Integer = 1
+                For i = 0 To found_lstbox.CheckedItems.Count - 1 Step 1
+                    Dim text As String = path_txtbox.Text
+                    If Strings.Right(text, 1) <> "\" Then
+                        text = text & "\" & found_lstbox.CheckedItems.Item(i)
+                    Else
+                        text = text & found_lstbox.CheckedItems.Item(i)
+                    End If
+                    HSXML.Write(count, text, AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml")
+                    count = count + 1
+                Next
+                Me.ProgressBar1.Value = 0
+                Me.ProgressBar1.Visible = True
+            Catch ex As Exception
+                MsgBox("无法写入配置文件：" & ex.Message, "错误")
+                exit_program = False
+                input_backup_path.Show()
+                Me.Close()
+            End Try
+            Try
+                BackgroundWorker1.RunWorkerAsync()
+            Catch ex As Exception
+                MsgBox("开始计算并写入MD5时出错：" & ex.Message, "错误")
+                exit_program = False
+                input_backup_path.Show()
+                Me.Close()
+            End Try
         End If
     End Sub
 
@@ -128,6 +142,9 @@ Public Class input_saves
         Catch ex As Exception
             MsgBox("计算并写入MD5时出错：" & ex.Message, MsgBoxStyle.Critical, "错误")
             BackgroundWorker1.CancelAsync()
+            exit_program = False
+            input_backup_path.Show()
+            Me.Close()
         End Try
     End Sub
 
@@ -154,7 +171,7 @@ Public Class input_saves
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "Config.hsxml")
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml")
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini")
-                ZipFile.ExtractToDirectory(zipPath, extractPath)
+                DecompressZip(zipPath, extractPath)
                 MsgBox("导入设置成功，设置将在下次启动软件后生效，请重启软件。", MsgBoxStyle.Information, "导出成功")
                 End
             End If
