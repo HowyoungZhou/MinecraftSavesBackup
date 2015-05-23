@@ -16,7 +16,8 @@ Imports MinecraftSavesBackup.Compression
 
 Public Class input_saves
     Dim HSXML As New HSXML
-    Public exit_program As Boolean
+    Public exit_program As Boolean = True
+    Public error_happened As Boolean = False
 
     Private Sub browse_btn_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles browse_btn.LinkClicked
         Try
@@ -45,7 +46,9 @@ Public Class input_saves
         If exit_program = True Then
             End
         Else
-            Me.Close()
+            Me.path_txtbox.Text = Nothing
+            Me.found_lstbox.Items.Clear()
+            Me.Hide()
         End If
     End Sub
 
@@ -83,17 +86,23 @@ Public Class input_saves
                 Me.ProgressBar1.Visible = True
             Catch ex As Exception
                 MsgBox("无法写入配置文件：" & ex.Message, "错误")
-                exit_program = False
-                input_backup_path.Show()
-                Me.Close()
+                Me.ProgressBar1.Value = 100
+                Me.ProgressBar1.Visible = False
+                ok_btn.Text = "确定(&O)"
+                ok_btn.Enabled = True
+                cancel_btn.Enabled = True
+                browse_btn.Enabled = True
             End Try
             Try
                 BackgroundWorker1.RunWorkerAsync()
             Catch ex As Exception
                 MsgBox("开始计算并写入MD5时出错：" & ex.Message, "错误")
-                exit_program = False
-                input_backup_path.Show()
-                Me.Close()
+                Me.ProgressBar1.Value = 100
+                Me.ProgressBar1.Visible = False
+                ok_btn.Text = "确定(&O)"
+                ok_btn.Enabled = True
+                cancel_btn.Enabled = True
+                browse_btn.Enabled = True
             End Try
         End If
     End Sub
@@ -141,24 +150,32 @@ Public Class input_saves
             Next
         Catch ex As Exception
             MsgBox("计算并写入MD5时出错：" & ex.Message, MsgBoxStyle.Critical, "错误")
+            error_happened = True
             BackgroundWorker1.CancelAsync()
-            exit_program = False
-            input_backup_path.Show()
-            Me.Close()
         End Try
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
-        Me.ProgressBar1.Value = Val(e.ProgressPercentage)
+        ProgressBar1.Value = Val(e.ProgressPercentage.ToString)
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
         On Error Resume Next
+        If error_happened = False Then
+            exit_program = False
+            input_backup_path.Show()
+            Me.path_txtbox.Text = Nothing
+            Me.found_lstbox.Items.Clear()
+            Me.Hide()
+        End If
+        error_happened = False
         Me.ProgressBar1.Value = 100
         Me.ProgressBar1.Visible = False
-        exit_program = False
-        input_backup_path.Show()
-        Me.Close()
+        ok_btn.Text = "确定(&O)"
+        ok_btn.Enabled = True
+        cancel_btn.Enabled = True
+        browse_btn.Enabled = True
+        Exit Sub
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked

@@ -32,5 +32,6 @@ Public Class online_update
 
     Private Sub cancel_btn_Click(sender As Object, e As EventArgs) Handles cancel_btn.Click
         Me.Close()
+        Exit Sub
     End Sub
 End Class

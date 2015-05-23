@@ -31,7 +31,7 @@ Partial Class main
         Me.version_lbl = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.program_path_lbl = New System.Windows.Forms.Label()
+        Me.program_path_txt = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -39,7 +39,7 @@ Partial Class main
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("微软雅黑", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(27, 24)
+        Me.Label1.Location = New System.Drawing.Point(27, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(276, 21)
         Me.Label1.TabIndex = 1
@@ -48,26 +48,26 @@ Partial Class main
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(28, 57)
+        Me.Label2.Location = New System.Drawing.Point(28, 53)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(263, 13)
+        Me.Label2.Size = New System.Drawing.Size(275, 12)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "此程序会将您的Minecraft存档备份升级到新版本。"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.MinecraftSavesBackupUpdate.My.Resources.Resources.minecraft_charactar
-        Me.PictureBox1.Location = New System.Drawing.Point(306, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(306, 11)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(110, 74)
+        Me.PictureBox1.Size = New System.Drawing.Size(110, 68)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
         'ok_btn
         '
-        Me.ok_btn.Location = New System.Drawing.Point(331, 228)
+        Me.ok_btn.Location = New System.Drawing.Point(331, 210)
         Me.ok_btn.Name = "ok_btn"
-        Me.ok_btn.Size = New System.Drawing.Size(85, 31)
+        Me.ok_btn.Size = New System.Drawing.Size(85, 29)
         Me.ok_btn.TabIndex = 5
         Me.ok_btn.Text = "确定(&O)"
         Me.ok_btn.UseVisualStyleBackColor = True
@@ -75,9 +75,9 @@ Partial Class main
         'cancel_btn
         '
         Me.cancel_btn.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cancel_btn.Location = New System.Drawing.Point(240, 228)
+        Me.cancel_btn.Location = New System.Drawing.Point(240, 210)
         Me.cancel_btn.Name = "cancel_btn"
-        Me.cancel_btn.Size = New System.Drawing.Size(85, 31)
+        Me.cancel_btn.Size = New System.Drawing.Size(85, 29)
         Me.cancel_btn.TabIndex = 6
         Me.cancel_btn.Text = "取消(&C)"
         Me.cancel_btn.UseVisualStyleBackColor = True
@@ -85,9 +85,9 @@ Partial Class main
         'version_lbl
         '
         Me.version_lbl.AutoSize = True
-        Me.version_lbl.Location = New System.Drawing.Point(28, 107)
+        Me.version_lbl.Location = New System.Drawing.Point(29, 100)
         Me.version_lbl.Name = "version_lbl"
-        Me.version_lbl.Size = New System.Drawing.Size(88, 13)
+        Me.version_lbl.Size = New System.Drawing.Size(113, 12)
         Me.version_lbl.TabIndex = 7
         Me.version_lbl.Text = "0.0.0.0 -> 0.0.0.0"
         '
@@ -95,7 +95,7 @@ Partial Class main
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(28, 94)
+        Me.Label3.Location = New System.Drawing.Point(28, 87)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 8
@@ -105,29 +105,34 @@ Partial Class main
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(28, 138)
+        Me.Label4.Location = New System.Drawing.Point(28, 127)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(59, 13)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "程序路径"
         '
-        'program_path_lbl
+        'program_path_txt
         '
-        Me.program_path_lbl.Location = New System.Drawing.Point(28, 151)
-        Me.program_path_lbl.Name = "program_path_lbl"
-        Me.program_path_lbl.Size = New System.Drawing.Size(388, 74)
-        Me.program_path_lbl.TabIndex = 10
-        Me.program_path_lbl.Text = "X:\"
+        Me.program_path_txt.BackColor = System.Drawing.Color.White
+        Me.program_path_txt.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.program_path_txt.ImeMode = System.Windows.Forms.ImeMode.Disable
+        Me.program_path_txt.Location = New System.Drawing.Point(31, 143)
+        Me.program_path_txt.Multiline = True
+        Me.program_path_txt.Name = "program_path_txt"
+        Me.program_path_txt.ReadOnly = True
+        Me.program_path_txt.Size = New System.Drawing.Size(385, 61)
+        Me.program_path_txt.TabIndex = 11
+        Me.program_path_txt.Text = "X:\"
         '
         'main
         '
         Me.AcceptButton = Me.ok_btn
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.cancel_btn
-        Me.ClientSize = New System.Drawing.Size(428, 271)
-        Me.Controls.Add(Me.program_path_lbl)
+        Me.ClientSize = New System.Drawing.Size(428, 250)
+        Me.Controls.Add(Me.program_path_txt)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.version_lbl)
@@ -154,6 +159,6 @@ Partial Class main
     Friend WithEvents version_lbl As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents program_path_lbl As System.Windows.Forms.Label
+    Friend WithEvents program_path_txt As System.Windows.Forms.TextBox
 
 End Class

@@ -30,8 +30,8 @@
     <PublisherName>Howyoung</PublisherName>
     <SuiteName>MinecraftSavesBackup</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.1.0.3</ApplicationVersion>
+    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationVersion>1.1.0.8</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -78,10 +78,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6B854B52D3FCB765E5011408417C37FA27CD8FC2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A4AD262688535E0DBE5EBD7A9986E10B2D5AB227</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>MinecraftSavesBackup_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>hyscpy_signature.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.wosign.com/timestamp</ManifestTimestampUrl>
@@ -90,7 +90,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>MinecraftSavesBackup_Key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>hyscpy_signature.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -231,7 +231,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MinecraftSavesBackup_Key.pfx" />
+    <None Include="hyscpy_signature.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -258,6 +258,11 @@
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@ Partial Class backup_animation
         Me.PictureBox1.Image = Global.MinecraftSavesBackup.My.Resources.Resources.ch1
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(50, 83)
+        Me.PictureBox1.Size = New System.Drawing.Size(50, 93)
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
@@ -46,10 +46,10 @@ Partial Class backup_animation
         '
         'backup_animation
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(50, 83)
+        Me.ClientSize = New System.Drawing.Size(50, 93)
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

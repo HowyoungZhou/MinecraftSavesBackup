@@ -62,6 +62,10 @@ Partial Class main
         Me.recovery_btn = New System.Windows.Forms.Button()
         Me.backup_btn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.exit_program_btn = New System.Windows.Forms.Button()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.game_path_lbl = New System.Windows.Forms.Label()
+        Me.run_game_btn = New System.Windows.Forms.Button()
         Me.percent_lbl = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.state_lbl = New System.Windows.Forms.Label()
@@ -84,6 +88,8 @@ Partial Class main
         Me.backup_size_lbl = New System.Windows.Forms.Label()
         Me.RefreshInfoTimer = New System.Windows.Forms.Timer(Me.components)
         Me.check_update_BackgroundWorker = New System.ComponentModel.BackgroundWorker()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.backup_interval_numericupdown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -106,26 +112,27 @@ Partial Class main
         'backup_BackgroundWorker
         '
         Me.backup_BackgroundWorker.WorkerReportsProgress = True
+        Me.backup_BackgroundWorker.WorkerSupportsCancellation = True
         '
         'automaticbackup_checkbox
         '
         Me.automaticbackup_checkbox.AutoSize = True
         Me.automaticbackup_checkbox.Checked = True
         Me.automaticbackup_checkbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.automaticbackup_checkbox.Location = New System.Drawing.Point(9, 19)
+        Me.automaticbackup_checkbox.Location = New System.Drawing.Point(9, 18)
         Me.automaticbackup_checkbox.Name = "automaticbackup_checkbox"
-        Me.automaticbackup_checkbox.Size = New System.Drawing.Size(74, 17)
+        Me.automaticbackup_checkbox.Size = New System.Drawing.Size(72, 16)
         Me.automaticbackup_checkbox.TabIndex = 3
         Me.automaticbackup_checkbox.Text = "自动备份"
         Me.automaticbackup_checkbox.UseVisualStyleBackColor = True
         '
         'backup_interval_numericupdown
         '
-        Me.backup_interval_numericupdown.Location = New System.Drawing.Point(54, 19)
+        Me.backup_interval_numericupdown.Location = New System.Drawing.Point(54, 18)
         Me.backup_interval_numericupdown.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
         Me.backup_interval_numericupdown.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.backup_interval_numericupdown.Name = "backup_interval_numericupdown"
-        Me.backup_interval_numericupdown.Size = New System.Drawing.Size(51, 20)
+        Me.backup_interval_numericupdown.Size = New System.Drawing.Size(51, 21)
         Me.backup_interval_numericupdown.TabIndex = 7
         Me.backup_interval_numericupdown.Value = New Decimal(New Integer() {30, 0, 0, 0})
         '
@@ -133,9 +140,9 @@ Partial Class main
         '
         Me.atsetintervals_radiobutton.AutoSize = True
         Me.atsetintervals_radiobutton.Checked = True
-        Me.atsetintervals_radiobutton.Location = New System.Drawing.Point(6, 19)
+        Me.atsetintervals_radiobutton.Location = New System.Drawing.Point(6, 18)
         Me.atsetintervals_radiobutton.Name = "atsetintervals_radiobutton"
-        Me.atsetintervals_radiobutton.Size = New System.Drawing.Size(49, 17)
+        Me.atsetintervals_radiobutton.Size = New System.Drawing.Size(47, 16)
         Me.atsetintervals_radiobutton.TabIndex = 4
         Me.atsetintervals_radiobutton.TabStop = True
         Me.atsetintervals_radiobutton.Text = "每隔"
@@ -144,9 +151,9 @@ Partial Class main
         'backup_after_start_radiobutton
         '
         Me.backup_after_start_radiobutton.AutoSize = True
-        Me.backup_after_start_radiobutton.Location = New System.Drawing.Point(6, 47)
+        Me.backup_after_start_radiobutton.Location = New System.Drawing.Point(6, 43)
         Me.backup_after_start_radiobutton.Name = "backup_after_start_radiobutton"
-        Me.backup_after_start_radiobutton.Size = New System.Drawing.Size(133, 17)
+        Me.backup_after_start_radiobutton.Size = New System.Drawing.Size(131, 16)
         Me.backup_after_start_radiobutton.TabIndex = 6
         Me.backup_after_start_radiobutton.Text = "开启软件后自动备份"
         Me.backup_after_start_radiobutton.UseVisualStyleBackColor = True
@@ -154,9 +161,9 @@ Partial Class main
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(108, 21)
+        Me.Label2.Location = New System.Drawing.Point(108, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(31, 13)
+        Me.Label2.Size = New System.Drawing.Size(29, 12)
         Me.Label2.TabIndex = 4
         Me.Label2.Text = "分钟"
         '
@@ -166,9 +173,9 @@ Partial Class main
         Me.GroupBox4.Controls.Add(Me.atsetintervals_radiobutton)
         Me.GroupBox4.Controls.Add(Me.backup_after_start_radiobutton)
         Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Location = New System.Drawing.Point(9, 42)
+        Me.GroupBox4.Location = New System.Drawing.Point(9, 39)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(145, 70)
+        Me.GroupBox4.Size = New System.Drawing.Size(145, 65)
         Me.GroupBox4.TabIndex = 11
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "自动备份时间"
@@ -177,9 +184,9 @@ Partial Class main
         '
         Me.find_difference_radiobutton.AutoSize = True
         Me.find_difference_radiobutton.Checked = True
-        Me.find_difference_radiobutton.Location = New System.Drawing.Point(6, 19)
+        Me.find_difference_radiobutton.Location = New System.Drawing.Point(6, 18)
         Me.find_difference_radiobutton.Name = "find_difference_radiobutton"
-        Me.find_difference_radiobutton.Size = New System.Drawing.Size(97, 17)
+        Me.find_difference_radiobutton.Size = New System.Drawing.Size(95, 16)
         Me.find_difference_radiobutton.TabIndex = 7
         Me.find_difference_radiobutton.TabStop = True
         Me.find_difference_radiobutton.Text = "文件发生变动"
@@ -188,9 +195,9 @@ Partial Class main
         'always_backup_radiobutton
         '
         Me.always_backup_radiobutton.AutoSize = True
-        Me.always_backup_radiobutton.Location = New System.Drawing.Point(6, 47)
+        Me.always_backup_radiobutton.Location = New System.Drawing.Point(6, 43)
         Me.always_backup_radiobutton.Name = "always_backup_radiobutton"
-        Me.always_backup_radiobutton.Size = New System.Drawing.Size(73, 17)
+        Me.always_backup_radiobutton.Size = New System.Drawing.Size(71, 16)
         Me.always_backup_radiobutton.TabIndex = 8
         Me.always_backup_radiobutton.Text = "始终备份"
         Me.always_backup_radiobutton.UseVisualStyleBackColor = True
@@ -199,9 +206,9 @@ Partial Class main
         '
         Me.GroupBox5.Controls.Add(Me.find_difference_radiobutton)
         Me.GroupBox5.Controls.Add(Me.always_backup_radiobutton)
-        Me.GroupBox5.Location = New System.Drawing.Point(166, 42)
+        Me.GroupBox5.Location = New System.Drawing.Point(166, 39)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(105, 70)
+        Me.GroupBox5.Size = New System.Drawing.Size(105, 65)
         Me.GroupBox5.TabIndex = 12
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "自动备份条件"
@@ -213,27 +220,30 @@ Partial Class main
         '
         'backup_path_lbl
         '
-        Me.backup_path_lbl.Location = New System.Drawing.Point(3, 108)
+        Me.backup_path_lbl.AutoEllipsis = True
+        Me.backup_path_lbl.Location = New System.Drawing.Point(6, 100)
         Me.backup_path_lbl.Name = "backup_path_lbl"
-        Me.backup_path_lbl.Size = New System.Drawing.Size(253, 30)
+        Me.backup_path_lbl.Size = New System.Drawing.Size(250, 25)
         Me.backup_path_lbl.TabIndex = 12
-        Me.backup_path_lbl.Text = "备份地址："
+        Me.backup_path_lbl.Text = "备份地址" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" & _
+    "\\\\\"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 20)
+        Me.Label1.Location = New System.Drawing.Point(6, 18)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(79, 13)
+        Me.Label1.Size = New System.Drawing.Size(77, 12)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "要备份的存档"
         '
         'saves_lstbox
         '
         Me.saves_lstbox.FormattingEnabled = True
-        Me.saves_lstbox.Location = New System.Drawing.Point(6, 36)
+        Me.saves_lstbox.ItemHeight = 12
+        Me.saves_lstbox.Location = New System.Drawing.Point(6, 33)
         Me.saves_lstbox.Name = "saves_lstbox"
-        Me.saves_lstbox.Size = New System.Drawing.Size(250, 69)
+        Me.saves_lstbox.Size = New System.Drawing.Size(250, 64)
         Me.saves_lstbox.TabIndex = 11
         '
         'LinkLabel1
@@ -241,7 +251,7 @@ Partial Class main
         Me.LinkLabel1.AutoSize = True
         Me.LinkLabel1.Location = New System.Drawing.Point(66, 0)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(31, 13)
+        Me.LinkLabel1.Size = New System.Drawing.Size(29, 12)
         Me.LinkLabel1.TabIndex = 9
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "更改"
@@ -260,9 +270,9 @@ Partial Class main
         Me.GroupBox2.Controls.Add(Me.GroupBox5)
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
         Me.GroupBox2.Controls.Add(Me.automaticbackup_checkbox)
-        Me.GroupBox2.Location = New System.Drawing.Point(298, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(298, 11)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(280, 424)
+        Me.GroupBox2.Size = New System.Drawing.Size(280, 391)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "设置"
@@ -270,33 +280,33 @@ Partial Class main
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(219, 406)
+        Me.Label7.Location = New System.Drawing.Point(219, 375)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(55, 13)
+        Me.Label7.Size = New System.Drawing.Size(53, 12)
         Me.Label7.TabIndex = 21
         Me.Label7.Text = "最大压缩"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 406)
+        Me.Label6.Location = New System.Drawing.Point(6, 375)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(43, 13)
+        Me.Label6.Size = New System.Drawing.Size(41, 12)
         Me.Label6.TabIndex = 20
         Me.Label6.Text = "无压缩"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 358)
+        Me.Label5.Location = New System.Drawing.Point(6, 330)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(55, 13)
+        Me.Label5.Size = New System.Drawing.Size(53, 12)
         Me.Label5.TabIndex = 19
         Me.Label5.Text = "压缩等级"
         '
         'level_TrackBar
         '
-        Me.level_TrackBar.Location = New System.Drawing.Point(9, 374)
+        Me.level_TrackBar.Location = New System.Drawing.Point(9, 345)
         Me.level_TrackBar.Maximum = 9
         Me.level_TrackBar.Minimum = 1
         Me.level_TrackBar.Name = "level_TrackBar"
@@ -309,9 +319,9 @@ Partial Class main
         Me.show_backup_animation_CheckBox.AutoSize = True
         Me.show_backup_animation_CheckBox.Checked = True
         Me.show_backup_animation_CheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.show_backup_animation_CheckBox.Location = New System.Drawing.Point(176, 19)
+        Me.show_backup_animation_CheckBox.Location = New System.Drawing.Point(176, 18)
         Me.show_backup_animation_CheckBox.Name = "show_backup_animation_CheckBox"
-        Me.show_backup_animation_CheckBox.Size = New System.Drawing.Size(98, 17)
+        Me.show_backup_animation_CheckBox.Size = New System.Drawing.Size(96, 16)
         Me.show_backup_animation_CheckBox.TabIndex = 17
         Me.show_backup_animation_CheckBox.Text = "显示备份动画"
         Me.show_backup_animation_CheckBox.UseVisualStyleBackColor = True
@@ -325,9 +335,9 @@ Partial Class main
         Me.GroupBox7.Controls.Add(Me.maxtotal_radiobutton)
         Me.GroupBox7.Controls.Add(Me.largestsize_radiobutton)
         Me.GroupBox7.Controls.Add(Me.delete_backup_checkbox)
-        Me.GroupBox7.Location = New System.Drawing.Point(9, 118)
+        Me.GroupBox7.Location = New System.Drawing.Point(9, 109)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(262, 90)
+        Me.GroupBox7.Size = New System.Drawing.Size(262, 83)
         Me.GroupBox7.TabIndex = 16
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "自动删除备份"
@@ -335,40 +345,40 @@ Partial Class main
         'largest_size_NumericUpDown
         '
         Me.largest_size_NumericUpDown.Enabled = False
-        Me.largest_size_NumericUpDown.Location = New System.Drawing.Point(102, 65)
+        Me.largest_size_NumericUpDown.Location = New System.Drawing.Point(102, 59)
         Me.largest_size_NumericUpDown.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
         Me.largest_size_NumericUpDown.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.largest_size_NumericUpDown.Name = "largest_size_NumericUpDown"
-        Me.largest_size_NumericUpDown.Size = New System.Drawing.Size(51, 20)
+        Me.largest_size_NumericUpDown.Size = New System.Drawing.Size(51, 21)
         Me.largest_size_NumericUpDown.TabIndex = 17
         Me.largest_size_NumericUpDown.Value = New Decimal(New Integer() {50, 0, 0, 0})
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(159, 67)
+        Me.Label4.Location = New System.Drawing.Point(159, 63)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(23, 13)
+        Me.Label4.Size = New System.Drawing.Size(17, 12)
         Me.Label4.TabIndex = 11
         Me.Label4.Text = "MB"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(159, 44)
+        Me.Label3.Location = New System.Drawing.Point(159, 41)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(19, 13)
+        Me.Label3.Size = New System.Drawing.Size(17, 12)
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "个"
         '
         'maxtotal_NumericUpDown
         '
         Me.maxtotal_NumericUpDown.Enabled = False
-        Me.maxtotal_NumericUpDown.Location = New System.Drawing.Point(102, 42)
+        Me.maxtotal_NumericUpDown.Location = New System.Drawing.Point(102, 37)
         Me.maxtotal_NumericUpDown.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
         Me.maxtotal_NumericUpDown.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.maxtotal_NumericUpDown.Name = "maxtotal_NumericUpDown"
-        Me.maxtotal_NumericUpDown.Size = New System.Drawing.Size(51, 20)
+        Me.maxtotal_NumericUpDown.Size = New System.Drawing.Size(51, 21)
         Me.maxtotal_NumericUpDown.TabIndex = 9
         Me.maxtotal_NumericUpDown.Value = New Decimal(New Integer() {20, 0, 0, 0})
         '
@@ -377,9 +387,9 @@ Partial Class main
         Me.maxtotal_radiobutton.AutoSize = True
         Me.maxtotal_radiobutton.Checked = True
         Me.maxtotal_radiobutton.Enabled = False
-        Me.maxtotal_radiobutton.Location = New System.Drawing.Point(6, 42)
+        Me.maxtotal_radiobutton.Location = New System.Drawing.Point(6, 39)
         Me.maxtotal_radiobutton.Name = "maxtotal_radiobutton"
-        Me.maxtotal_radiobutton.Size = New System.Drawing.Size(97, 17)
+        Me.maxtotal_radiobutton.Size = New System.Drawing.Size(95, 16)
         Me.maxtotal_radiobutton.TabIndex = 7
         Me.maxtotal_radiobutton.TabStop = True
         Me.maxtotal_radiobutton.Text = "备份总数最多"
@@ -389,9 +399,9 @@ Partial Class main
         '
         Me.largestsize_radiobutton.AutoSize = True
         Me.largestsize_radiobutton.Enabled = False
-        Me.largestsize_radiobutton.Location = New System.Drawing.Point(6, 65)
+        Me.largestsize_radiobutton.Location = New System.Drawing.Point(6, 61)
         Me.largestsize_radiobutton.Name = "largestsize_radiobutton"
-        Me.largestsize_radiobutton.Size = New System.Drawing.Size(97, 17)
+        Me.largestsize_radiobutton.Size = New System.Drawing.Size(95, 16)
         Me.largestsize_radiobutton.TabIndex = 8
         Me.largestsize_radiobutton.Text = "总大小不超过"
         Me.largestsize_radiobutton.UseVisualStyleBackColor = True
@@ -399,9 +409,9 @@ Partial Class main
         'delete_backup_checkbox
         '
         Me.delete_backup_checkbox.AutoSize = True
-        Me.delete_backup_checkbox.Location = New System.Drawing.Point(6, 19)
+        Me.delete_backup_checkbox.Location = New System.Drawing.Point(6, 18)
         Me.delete_backup_checkbox.Name = "delete_backup_checkbox"
-        Me.delete_backup_checkbox.Size = New System.Drawing.Size(146, 17)
+        Me.delete_backup_checkbox.Size = New System.Drawing.Size(144, 16)
         Me.delete_backup_checkbox.TabIndex = 0
         Me.delete_backup_checkbox.Text = "启用自动删除备份功能"
         Me.delete_backup_checkbox.UseVisualStyleBackColor = True
@@ -409,9 +419,9 @@ Partial Class main
         'autostart_checkbox
         '
         Me.autostart_checkbox.AutoSize = True
-        Me.autostart_checkbox.Location = New System.Drawing.Point(81, 19)
+        Me.autostart_checkbox.Location = New System.Drawing.Point(81, 18)
         Me.autostart_checkbox.Name = "autostart_checkbox"
-        Me.autostart_checkbox.Size = New System.Drawing.Size(98, 17)
+        Me.autostart_checkbox.Size = New System.Drawing.Size(96, 16)
         Me.autostart_checkbox.TabIndex = 15
         Me.autostart_checkbox.Text = "开机自动启动"
         Me.autostart_checkbox.UseVisualStyleBackColor = True
@@ -422,7 +432,7 @@ Partial Class main
         Me.next_start_lbl.ForeColor = System.Drawing.Color.Gray
         Me.next_start_lbl.Location = New System.Drawing.Point(42, 0)
         Me.next_start_lbl.Name = "next_start_lbl"
-        Me.next_start_lbl.Size = New System.Drawing.Size(67, 13)
+        Me.next_start_lbl.Size = New System.Drawing.Size(65, 12)
         Me.next_start_lbl.TabIndex = 14
         Me.next_start_lbl.Text = "配置已生效"
         Me.next_start_lbl.Visible = False
@@ -433,18 +443,18 @@ Partial Class main
         Me.GroupBox6.Controls.Add(Me.Label1)
         Me.GroupBox6.Controls.Add(Me.saves_lstbox)
         Me.GroupBox6.Controls.Add(Me.LinkLabel1)
-        Me.GroupBox6.Location = New System.Drawing.Point(9, 214)
+        Me.GroupBox6.Location = New System.Drawing.Point(9, 198)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(262, 141)
+        Me.GroupBox6.Size = New System.Drawing.Size(262, 130)
         Me.GroupBox6.TabIndex = 13
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "备份设置"
         '
         'about_btn
         '
-        Me.about_btn.Location = New System.Drawing.Point(143, 55)
+        Me.about_btn.Location = New System.Drawing.Point(143, 86)
         Me.about_btn.Name = "about_btn"
-        Me.about_btn.Size = New System.Drawing.Size(128, 30)
+        Me.about_btn.Size = New System.Drawing.Size(128, 28)
         Me.about_btn.TabIndex = 16
         Me.about_btn.Text = "关于(&A)"
         Me.ToolTip1.SetToolTip(Me.about_btn, "关于软件")
@@ -452,9 +462,9 @@ Partial Class main
         '
         'exit_btn
         '
-        Me.exit_btn.Location = New System.Drawing.Point(9, 55)
+        Me.exit_btn.Location = New System.Drawing.Point(9, 52)
         Me.exit_btn.Name = "exit_btn"
-        Me.exit_btn.Size = New System.Drawing.Size(128, 30)
+        Me.exit_btn.Size = New System.Drawing.Size(128, 28)
         Me.exit_btn.TabIndex = 15
         Me.exit_btn.Text = "管理设置(&M)"
         Me.ToolTip1.SetToolTip(Me.exit_btn, "导入、导出或清除所有设置")
@@ -462,9 +472,9 @@ Partial Class main
         '
         'recovery_btn
         '
-        Me.recovery_btn.Location = New System.Drawing.Point(143, 19)
+        Me.recovery_btn.Location = New System.Drawing.Point(143, 18)
         Me.recovery_btn.Name = "recovery_btn"
-        Me.recovery_btn.Size = New System.Drawing.Size(128, 30)
+        Me.recovery_btn.Size = New System.Drawing.Size(128, 28)
         Me.recovery_btn.TabIndex = 14
         Me.recovery_btn.Text = "查看备份(&V)"
         Me.ToolTip1.SetToolTip(Me.recovery_btn, "查看、导入、导出及恢复备份")
@@ -472,9 +482,9 @@ Partial Class main
         '
         'backup_btn
         '
-        Me.backup_btn.Location = New System.Drawing.Point(9, 19)
+        Me.backup_btn.Location = New System.Drawing.Point(9, 18)
         Me.backup_btn.Name = "backup_btn"
-        Me.backup_btn.Size = New System.Drawing.Size(128, 30)
+        Me.backup_btn.Size = New System.Drawing.Size(128, 28)
         Me.backup_btn.TabIndex = 13
         Me.backup_btn.Text = "立即备份(&B)"
         Me.ToolTip1.SetToolTip(Me.backup_btn, "立即执行一次备份")
@@ -482,39 +492,83 @@ Partial Class main
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label8)
+        Me.GroupBox3.Controls.Add(Me.exit_program_btn)
+        Me.GroupBox3.Controls.Add(Me.LinkLabel2)
+        Me.GroupBox3.Controls.Add(Me.game_path_lbl)
+        Me.GroupBox3.Controls.Add(Me.run_game_btn)
         Me.GroupBox3.Controls.Add(Me.about_btn)
         Me.GroupBox3.Controls.Add(Me.exit_btn)
         Me.GroupBox3.Controls.Add(Me.recovery_btn)
         Me.GroupBox3.Controls.Add(Me.backup_btn)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 338)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 255)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(280, 98)
+        Me.GroupBox3.Size = New System.Drawing.Size(280, 148)
         Me.GroupBox3.TabIndex = 4
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "操作"
         '
+        'exit_program_btn
+        '
+        Me.exit_program_btn.Location = New System.Drawing.Point(9, 86)
+        Me.exit_program_btn.Name = "exit_program_btn"
+        Me.exit_program_btn.Size = New System.Drawing.Size(128, 28)
+        Me.exit_program_btn.TabIndex = 20
+        Me.exit_program_btn.Text = "退出程序(&E)"
+        Me.ToolTip1.SetToolTip(Me.exit_program_btn, "退出程序")
+        Me.exit_program_btn.UseVisualStyleBackColor = True
+        '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(240, 123)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(29, 12)
+        Me.LinkLabel2.TabIndex = 19
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "更改"
+        '
+        'game_path_lbl
+        '
+        Me.game_path_lbl.AutoEllipsis = True
+        Me.game_path_lbl.Location = New System.Drawing.Point(6, 131)
+        Me.game_path_lbl.Name = "game_path_lbl"
+        Me.game_path_lbl.Size = New System.Drawing.Size(228, 14)
+        Me.game_path_lbl.TabIndex = 18
+        Me.game_path_lbl.Text = "(未指定)"
+        '
+        'run_game_btn
+        '
+        Me.run_game_btn.Location = New System.Drawing.Point(143, 52)
+        Me.run_game_btn.Name = "run_game_btn"
+        Me.run_game_btn.Size = New System.Drawing.Size(128, 28)
+        Me.run_game_btn.TabIndex = 17
+        Me.run_game_btn.Text = "启动游戏(&R)"
+        Me.ToolTip1.SetToolTip(Me.run_game_btn, "启动Minecraft游戏")
+        Me.run_game_btn.UseVisualStyleBackColor = True
+        '
         'percent_lbl
         '
         Me.percent_lbl.AutoSize = True
-        Me.percent_lbl.Location = New System.Drawing.Point(202, 23)
+        Me.percent_lbl.Location = New System.Drawing.Point(202, 21)
         Me.percent_lbl.Name = "percent_lbl"
-        Me.percent_lbl.Size = New System.Drawing.Size(57, 13)
+        Me.percent_lbl.Size = New System.Drawing.Size(53, 12)
         Me.percent_lbl.TabIndex = 1
         Me.percent_lbl.Text = "已完成0%"
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(9, 40)
+        Me.ProgressBar1.Location = New System.Drawing.Point(9, 37)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(262, 20)
+        Me.ProgressBar1.Size = New System.Drawing.Size(262, 18)
         Me.ProgressBar1.TabIndex = 2
         '
         'state_lbl
         '
         Me.state_lbl.AutoSize = True
-        Me.state_lbl.Location = New System.Drawing.Point(6, 23)
+        Me.state_lbl.Location = New System.Drawing.Point(6, 21)
         Me.state_lbl.Name = "state_lbl"
-        Me.state_lbl.Size = New System.Drawing.Size(145, 13)
+        Me.state_lbl.Size = New System.Drawing.Size(149, 12)
         Me.state_lbl.TabIndex = 0
         Me.state_lbl.Text = "当前状态：等待下一次备份"
         '
@@ -523,9 +577,9 @@ Partial Class main
         Me.GroupBox1.Controls.Add(Me.percent_lbl)
         Me.GroupBox1.Controls.Add(Me.ProgressBar1)
         Me.GroupBox1.Controls.Add(Me.state_lbl)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 11)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(280, 75)
+        Me.GroupBox1.Size = New System.Drawing.Size(280, 69)
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "状态"
@@ -541,60 +595,60 @@ Partial Class main
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MinecraftToolStripMenuItem, Me.ToolStripSeparator1, Me.当前状态ToolStripMenuItem, Me.ToolStripSeparator2, Me.打开主窗体OToolStripMenuItem, Me.立即备份BToolStripMenuItem, Me.自动备份AToolStripMenuItem, Me.查看备份VToolStripMenuItem, Me.退出EToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(231, 170)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(221, 170)
         '
         'MinecraftToolStripMenuItem
         '
         Me.MinecraftToolStripMenuItem.Enabled = False
         Me.MinecraftToolStripMenuItem.Name = "MinecraftToolStripMenuItem"
-        Me.MinecraftToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.MinecraftToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.MinecraftToolStripMenuItem.Text = "Minecraft存档备份"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(227, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(217, 6)
         '
         '当前状态ToolStripMenuItem
         '
         Me.当前状态ToolStripMenuItem.Enabled = False
         Me.当前状态ToolStripMenuItem.Name = "当前状态ToolStripMenuItem"
-        Me.当前状态ToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.当前状态ToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.当前状态ToolStripMenuItem.Text = "当前状态：等待下一次备份"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(227, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(217, 6)
         '
         '打开主窗体OToolStripMenuItem
         '
         Me.打开主窗体OToolStripMenuItem.Name = "打开主窗体OToolStripMenuItem"
-        Me.打开主窗体OToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.打开主窗体OToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.打开主窗体OToolStripMenuItem.Text = "打开主窗体(&O)"
         '
         '立即备份BToolStripMenuItem
         '
         Me.立即备份BToolStripMenuItem.Name = "立即备份BToolStripMenuItem"
-        Me.立即备份BToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.立即备份BToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.立即备份BToolStripMenuItem.Text = "立即备份(&B)"
         '
         '自动备份AToolStripMenuItem
         '
         Me.自动备份AToolStripMenuItem.Name = "自动备份AToolStripMenuItem"
-        Me.自动备份AToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.自动备份AToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.自动备份AToolStripMenuItem.Text = "关闭/开启自动备份(&C)"
         '
         '查看备份VToolStripMenuItem
         '
         Me.查看备份VToolStripMenuItem.Name = "查看备份VToolStripMenuItem"
-        Me.查看备份VToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.查看备份VToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.查看备份VToolStripMenuItem.Text = "查看备份(&V)"
         '
         '退出EToolStripMenuItem
         '
         Me.退出EToolStripMenuItem.Name = "退出EToolStripMenuItem"
-        Me.退出EToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.退出EToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
         Me.退出EToolStripMenuItem.Text = "退出(&E)"
         '
         'NotifyIconTimer
@@ -604,9 +658,9 @@ Partial Class main
         '
         Me.GroupBox8.Controls.Add(Me.backup_lstbox)
         Me.GroupBox8.Controls.Add(Me.backup_size_lbl)
-        Me.GroupBox8.Location = New System.Drawing.Point(12, 93)
+        Me.GroupBox8.Location = New System.Drawing.Point(12, 86)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(280, 239)
+        Me.GroupBox8.Size = New System.Drawing.Size(280, 163)
         Me.GroupBox8.TabIndex = 6
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "现有备份"
@@ -614,17 +668,18 @@ Partial Class main
         'backup_lstbox
         '
         Me.backup_lstbox.FormattingEnabled = True
-        Me.backup_lstbox.Location = New System.Drawing.Point(6, 21)
+        Me.backup_lstbox.ItemHeight = 12
+        Me.backup_lstbox.Location = New System.Drawing.Point(6, 18)
         Me.backup_lstbox.Name = "backup_lstbox"
-        Me.backup_lstbox.Size = New System.Drawing.Size(268, 186)
+        Me.backup_lstbox.Size = New System.Drawing.Size(268, 124)
         Me.backup_lstbox.TabIndex = 1
         '
         'backup_size_lbl
         '
         Me.backup_size_lbl.AutoSize = True
-        Me.backup_size_lbl.Location = New System.Drawing.Point(3, 216)
+        Me.backup_size_lbl.Location = New System.Drawing.Point(3, 144)
         Me.backup_size_lbl.Name = "backup_size_lbl"
-        Me.backup_size_lbl.Size = New System.Drawing.Size(98, 13)
+        Me.backup_size_lbl.Size = New System.Drawing.Size(101, 12)
         Me.backup_size_lbl.TabIndex = 0
         Me.backup_size_lbl.Text = "备份总大小：0 MB"
         '
@@ -636,12 +691,27 @@ Partial Class main
         'check_update_BackgroundWorker
         '
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "Minecraft.exe"
+        Me.OpenFileDialog1.Filter = "exe程序(*.exe)|*.exe|所有文件(*.*)|*.*"
+        Me.OpenFileDialog1.Title = "浏览游戏地址"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 117)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(53, 12)
+        Me.Label8.TabIndex = 21
+        Me.Label8.Text = "游戏地址"
+        '
         'main
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(590, 448)
+        Me.ClientSize = New System.Drawing.Size(590, 414)
         Me.Controls.Add(Me.GroupBox8)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox3)
@@ -667,6 +737,7 @@ Partial Class main
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -735,4 +806,10 @@ Partial Class main
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents level_TrackBar As System.Windows.Forms.TrackBar
+    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
+    Friend WithEvents game_path_lbl As System.Windows.Forms.Label
+    Friend WithEvents run_game_btn As System.Windows.Forms.Button
+    Friend WithEvents exit_program_btn As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class

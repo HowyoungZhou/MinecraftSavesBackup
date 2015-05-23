@@ -16,6 +16,7 @@ Imports MinecraftSavesBackup.Compression
 Public Class input_backup_path
     Dim HSXML As New HSXML
     Dim return_input_saves As Boolean = True
+    Public error_happened As Boolean = False
 
     Private Sub browse_btn_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles browse_btn.LinkClicked
         If FolderBrowserDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
@@ -30,7 +31,7 @@ Public Class input_backup_path
             Try
                 My.Computer.FileSystem.WriteAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini", path_txtbox.Text, False)
                 '加载备份文件夹地址
-                main.backup_path_lbl.Text = "备份地址：" & My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini")
+                main.backup_path_lbl.Text = "备份地址" & vbCrLf & My.Computer.FileSystem.ReadAllText(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini")
             Catch ex As Exception
                 MsgBox("写入配置文件时出现错误：" & ex.Message, MsgBoxStyle.Critical, "错误")
             End Try
@@ -41,18 +42,22 @@ Public Class input_backup_path
                         MsgBox("配置文件(BackupFolder.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
                         input_saves.Show()
                         Me.Close()
+                        Exit Sub
                     ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini") = False Then
                         MsgBox("配置文件(BackupPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
                         input_saves.Show()
                         Me.Close()
+                        Exit Sub
                     ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml") = False Then
                         MsgBox("配置文件(MD5.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
                         input_saves.Show()
                         Me.Close()
+                        Exit Sub
                     ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") = False Then
                         MsgBox("配置文件(savesPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
                         input_saves.Show()
                         Me.Close()
+                        Exit Sub
                     Else
                         '备份过程
                         ProgressBar1.Visible = True
@@ -66,6 +71,7 @@ Public Class input_backup_path
                     Call main.mainshown()
                     main.Show()
                     Me.Close()
+                    Exit Sub
                 End If
             Catch ex As Exception
                 MsgBox("无法启动自动备份：" & ex.Message, MsgBoxStyle.Critical, "错误")
@@ -78,6 +84,7 @@ Public Class input_backup_path
     Private Sub cancel_btn_Click(sender As Object, e As EventArgs) Handles cancel_btn.Click
         input_saves.Show()
         Me.Close()
+        Exit Sub
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
@@ -129,27 +136,31 @@ Public Class input_backup_path
                 BackgroundWorker1.ReportProgress(i / HSXML.Count(AppDomain.CurrentDomain.BaseDirectory & "BackupFolder.hsxml") * 100)
             Next
         Catch ex As Exception
+            error_happened = True
             MsgBox("备份时出错：" & ex.Message, MsgBoxStyle.Critical, "错误")
             BackgroundWorker1.CancelAsync()
-            ok_btn.Enabled = True
-            ok_btn.Text = "确定(&O)"
         End Try
     End Sub
 
     Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
-        ProgressBar1.Value = Val(e.ProgressPercentage.ToString)
+        ProgressBar1.Value = e.ProgressPercentage
     End Sub
 
     Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
         On Error Resume Next
+        If error_happened = False Then
+            MsgBox("备份已完成。", MsgBoxStyle.Information, "提示")
+            Call main.mainshown()
+            main.Show()
+            Me.Close()
+        End If
+        error_happened = False
+        error_happened = False
         ProgressBar1.Value = 100
         ProgressBar1.Visible = False
         ok_btn.Enabled = True
         ok_btn.Text = "确定(&O)"
-        MsgBox("备份已完成。", MsgBoxStyle.Information, "提示")
-        Call main.mainshown()
-        main.Show()
-        Me.Close()
+        Exit Sub
     End Sub
 
     Private Sub input_backup_path_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

@@ -55,18 +55,22 @@ Public Class view_backup
             MsgBox("配置文件(BackupFolder.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini") = False Then
             MsgBox("配置文件(BackupPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml") = False Then
             MsgBox("配置文件(MD5.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") = False Then
             MsgBox("配置文件(savesPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         Else
             RefreshInfo()
         End If
@@ -233,8 +237,6 @@ Public Class view_backup
             MsgBox("恢复存档时出现错误：" & ex.Message, MsgBoxStyle.Critical, "错误")
             BackgroundWorker1.CancelAsync()
             errorhappend = True
-            recovery_btn.Enabled = True
-            recovery_btn.Text = "恢复选定的存档(&R)"
         End Try
     End Sub
 

@@ -19,18 +19,22 @@ Public Class manage_config
             MsgBox("配置文件(BackupFolder.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "BackupPath.ini") = False Then
             MsgBox("配置文件(BackupPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "MD5.hsxml") = False Then
             MsgBox("配置文件(MD5.hsxml)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         ElseIf My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") = False Then
             MsgBox("配置文件(savesPath.ini)丢失，请重新配置！", MsgBoxStyle.Exclamation, "提示")
             input_saves.Show()
             Me.Close()
+            Exit Sub
         End If
     End Sub
 
@@ -83,7 +87,6 @@ Public Class manage_config
                 If My.Computer.FileSystem.FileExists(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini") Then My.Computer.FileSystem.DeleteFile(AppDomain.CurrentDomain.BaseDirectory & "savesPath.ini")
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", Application.ProductName, "")
                 MsgBox("已清除所有设置，请重新启动软件。", MsgBoxStyle.Information, "清除成功")
-                Me.Close()
                 End
             Catch ex As Exception
                 MsgBox("无法清除设置：" & ex.Message, MsgBoxStyle.Critical, "错误")
